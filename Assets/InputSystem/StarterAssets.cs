@@ -182,6 +182,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Create"",
+                    ""type"": ""Button"",
+                    ""id"": ""aeab2ad5-013d-4b75-bbc6-85ffad6d7d7d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -294,6 +303,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Instantiate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9d4578a-26d8-4a92-8a96-5868d46bf4c7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b116b82-e883-47a4-9d13-01bdd8b52bca"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Create"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -355,6 +386,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         // Construction
         m_Construction = asset.FindActionMap("Construction", throwIfNotFound: true);
         m_Construction_Instantiate = m_Construction.FindAction("Instantiate", throwIfNotFound: true);
+        m_Construction_Create = m_Construction.FindAction("Create", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -456,11 +488,13 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Construction;
     private IConstructionActions m_ConstructionActionsCallbackInterface;
     private readonly InputAction m_Construction_Instantiate;
+    private readonly InputAction m_Construction_Create;
     public struct ConstructionActions
     {
         private @PlayerInputActions m_Wrapper;
         public ConstructionActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Instantiate => m_Wrapper.m_Construction_Instantiate;
+        public InputAction @Create => m_Wrapper.m_Construction_Create;
         public InputActionMap Get() { return m_Wrapper.m_Construction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -473,6 +507,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Instantiate.started -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnInstantiate;
                 @Instantiate.performed -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnInstantiate;
                 @Instantiate.canceled -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnInstantiate;
+                @Create.started -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnCreate;
+                @Create.performed -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnCreate;
+                @Create.canceled -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnCreate;
             }
             m_Wrapper.m_ConstructionActionsCallbackInterface = instance;
             if (instance != null)
@@ -480,6 +517,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Instantiate.started += instance.OnInstantiate;
                 @Instantiate.performed += instance.OnInstantiate;
                 @Instantiate.canceled += instance.OnInstantiate;
+                @Create.started += instance.OnCreate;
+                @Create.performed += instance.OnCreate;
+                @Create.canceled += instance.OnCreate;
             }
         }
     }
@@ -528,5 +568,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     public interface IConstructionActions
     {
         void OnInstantiate(InputAction.CallbackContext context);
+        void OnCreate(InputAction.CallbackContext context);
     }
 }
