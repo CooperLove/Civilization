@@ -6,10 +6,13 @@ using UnityEngine;
 public abstract class Construction : MonoBehaviour
 {
     protected new Renderer renderer;
+    public bool CanBePlacedOnTerrain { get; protected set; }
+
     // Start is called before the first frame update
     void Awake()
     {
         renderer = GetComponent<Renderer>();
+        CanBePlacedOnTerrain = true;
     }
 
     //public virtual void OnCollisionEnter (Collision collision) {

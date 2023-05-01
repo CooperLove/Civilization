@@ -24,12 +24,14 @@ public class BasicConstruction : Construction
             return;
         Debug.Log("Colliding with " + collision.collider.name);
         renderer.material.color = Color.red;
+        CanBePlacedOnTerrain = false;
     }
 
     public void OnCollisionExit(Collision collision)
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
             return;
+        CanBePlacedOnTerrain = true;
         Debug.Log("Exiting collision with " + collision.collider.name);
         renderer.material.color = Color.green;
     }
