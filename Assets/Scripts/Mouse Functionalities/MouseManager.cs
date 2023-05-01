@@ -7,11 +7,11 @@ public class MouseManager : MonoBehaviour
 {
     public Vector3 worldPosition;
     Plane plane = new(Vector3.up, 0);
+    LayerMask layerMask = 1 << 9;
     [SerializeField] GameObject g;
     [SerializeField] float rayDuration = 1f;
     [SerializeField] float rayLength = 1f;
     [SerializeField] bool drawRay = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +26,9 @@ public class MouseManager : MonoBehaviour
         //    worldPosition = ray.GetPoint(distance);
         //    g.transform.position = worldPosition;
         //}
+        
+        if (Physics.Raycast(ray, out RaycastHit hit, 2000f, layerMask)) {
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 2000f)) { 
             worldPosition = hit.point;
             g.transform.position = worldPosition;
             rayLength = hit.distance;

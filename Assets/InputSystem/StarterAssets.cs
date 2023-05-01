@@ -169,6 +169,133 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Construction"",
+            ""id"": ""5b930070-f775-4587-8eed-4cb3c0496e8b"",
+            ""actions"": [
+                {
+                    ""name"": ""Instantiate"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2bfca26-1034-45f5-9f8e-aaafc28bcf32"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9add5f5b-5153-4a59-810c-95204477b0dd"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4a7ae68-8d84-41ac-980b-d799d55f94b8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c2c04ec-f578-43f6-82b8-5334658bcbd9"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50114ec9-b05e-4275-9e3e-5fcc2d38f1b2"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bbaeac4a-6834-4d64-994b-c79001e3be65"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7442142c-9e49-4c1c-9dbe-71bb4ba369a6"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79b49430-d23d-4f39-bfff-190001f85f32"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""184b819d-1723-40db-bbe1-12551a731fe0"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bca66ca-64f9-421d-b84d-db142965a97a"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c5cee02-04fd-4129-bf30-bc9cabf49606"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Instantiate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -225,6 +352,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        // Construction
+        m_Construction = asset.FindActionMap("Construction", throwIfNotFound: true);
+        m_Construction_Instantiate = m_Construction.FindAction("Instantiate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -321,6 +451,39 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Construction
+    private readonly InputActionMap m_Construction;
+    private IConstructionActions m_ConstructionActionsCallbackInterface;
+    private readonly InputAction m_Construction_Instantiate;
+    public struct ConstructionActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public ConstructionActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Instantiate => m_Wrapper.m_Construction_Instantiate;
+        public InputActionMap Get() { return m_Wrapper.m_Construction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ConstructionActions set) { return set.Get(); }
+        public void SetCallbacks(IConstructionActions instance)
+        {
+            if (m_Wrapper.m_ConstructionActionsCallbackInterface != null)
+            {
+                @Instantiate.started -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnInstantiate;
+                @Instantiate.performed -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnInstantiate;
+                @Instantiate.canceled -= m_Wrapper.m_ConstructionActionsCallbackInterface.OnInstantiate;
+            }
+            m_Wrapper.m_ConstructionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Instantiate.started += instance.OnInstantiate;
+                @Instantiate.performed += instance.OnInstantiate;
+                @Instantiate.canceled += instance.OnInstantiate;
+            }
+        }
+    }
+    public ConstructionActions @Construction => new ConstructionActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -361,5 +524,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+    }
+    public interface IConstructionActions
+    {
+        void OnInstantiate(InputAction.CallbackContext context);
     }
 }
