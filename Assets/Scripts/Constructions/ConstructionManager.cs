@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class ConstructionManager : MonoBehaviour
 {
-    [SerializeField] private GameObject g = null;
+    [SerializeField] private GameObject g;
 
     // Start is called before the first frame update
     void Awake()
