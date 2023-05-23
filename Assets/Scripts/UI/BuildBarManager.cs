@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode.Components;
@@ -8,18 +9,28 @@ public class BuildBarManager : MonoBehaviour
 {
     public static BuildBarManager Instance { get; private set; }
 
+    private PlayerInput _playerInput;
     [SerializeField] private PlayerInputActions _actions;
     Dictionary<InputControl, int> inputControls = new();
     [SerializeField] private List<GameObject> gameObjects = new List<GameObject>();
 
     [SerializeField] private GameObject currentBuildable = null;
-
+    [SerializeField] private GameObject buildBar= null;
+    private Dictionary<InputControl, Action> methods = new();
 
     // Start is called before the first frame update
     void Awake()
     {
         if (Instance == null)
             Instance = this;
+
+        _playerInput = GetComponent<PlayerInput>();
+
+        methods = new() {
+            {Keyboard.current.escapeKey, () => OnDestroyBuildable() },
+            {Keyboard.current.bKey, () => OpenBuildBar() },
+            {Mouse.current.leftButton, () => OnTryPlaceBuildable() },
+        };
 
         inputControls = new() {
             { Keyboard.current.digit1Key, 0 },
@@ -52,16 +63,13 @@ public class BuildBarManager : MonoBehaviour
     {
         if (!context.performed)
             return;
+        
+        Debug.Log("Performing "+context.control);
 
-        if (context.control.Equals(Mouse.current.leftButton))
-        {
-            Debug.Log("Trying to place a buildable");
-            OnTryPlaceBuildable();
-        }
-
-        if (context.control.Equals(Keyboard.current.escapeKey))
-        {
-            OnDestroyBuildable();
+        if (methods.ContainsKey(context.control)) { 
+            methods.TryGetValue(context.control, out Action action);
+            action?.Invoke();
+            return;
         }
 
         if (inputControls.TryGetValue(context.control, out int index))
@@ -72,9 +80,12 @@ public class BuildBarManager : MonoBehaviour
 
     }
 
-    private void OnCreateBuildable(int index)
+    public void OpenBuildBar() => buildBar?.SetActive(!buildBar.activeInHierarchy);
+
+    public void OnCreateBuildable(int index)
     {
-        Debug.Log("Creating construction number " + index);
+        _playerInput.SwitchCurrentActionMap("Construction");
+        Debug.Log("Creating construction number " + index+" \n"+_actions.Player.Get().enabled);
         Create(index);
     }
 
@@ -90,7 +101,10 @@ public class BuildBarManager : MonoBehaviour
         MouseManager.Instance.g = currentBuildable;
     }
 
-    private void OnDestroyBuildable() => Destroy(MouseManager.Instance.g);
+    private void OnDestroyBuildable() {
+        _playerInput.SwitchCurrentActionMap("Player");
+        Destroy(MouseManager.Instance.g);
+    }
     private void OnPlaceBuildable() => MouseManager.Instance.g = null;
 
     private void OnTryPlaceBuildable() {
@@ -103,5 +117,6 @@ public class BuildBarManager : MonoBehaviour
         Destroy(currentBuildable.GetComponent<NetworkRigidbody>());
         Destroy(currentBuildable.GetComponent<Rigidbody>()); 
         OnPlaceBuildable();
+        _playerInput.SwitchCurrentActionMap("Player");
     } 
 }

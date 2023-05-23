@@ -22,7 +22,7 @@ public class BasicConstruction : Construction
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
             return;
-        Debug.Log("Colliding with " + collision.collider.name);
+        //Debug.Log("Colliding with " + collision.collider.name);
         renderer.material.color = Color.red;
         CanBePlacedOnTerrain = false;
     }
@@ -32,7 +32,7 @@ public class BasicConstruction : Construction
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
             return;
         CanBePlacedOnTerrain = true;
-        Debug.Log("Exiting collision with " + collision.collider.name);
+        //Debug.Log("Exiting collision with " + collision.collider.name);
         renderer.material.color = Color.green;
     }
 }

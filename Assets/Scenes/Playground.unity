@@ -1234,6 +1234,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currentBuildable: {fileID: 0}
+  buildBar: {fileID: 46239463}
 --- !u!114 &304589160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1300,9 +1301,57 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: aeab2ad5-013d-4b75-bbc6-85ffad6d7d7d
     m_ActionName: Construction/Create[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 304589159}
+        m_TargetAssemblyTypeName: BuildBarManager, Assembly-CSharp
+        m_MethodName: OnListenToInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 20e0225d-12e6-4092-94fe-24371de70202
+    m_ActionName: Player/Open Build[/Keyboard/b]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 304589159}
+        m_TargetAssemblyTypeName: BuildBarManager, Assembly-CSharp
+        m_MethodName: OnListenToInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 85a98fd8-6ff8-475f-b6c9-2c76c4dc7531
+    m_ActionName: Player/Instantiate[/Keyboard/0,/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 304589159}
+        m_TargetAssemblyTypeName: BuildBarManager, Assembly-CSharp
+        m_MethodName: OnListenToInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 109a613c-fdad-4f01-81ff-fbf370fe23a3
+    m_ActionName: Player/Create[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: KeyboardMouse
-  m_DefaultActionMap: Construction
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &312583927
@@ -1484,6 +1533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee21ddc56b7caf2469bcc330fb032150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  g: {fileID: 0}
 --- !u!1 &343673291
 GameObject:
   m_ObjectHideFlags: 0
@@ -5870,7 +5920,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1467470693}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 304589159}
+        m_TargetAssemblyTypeName: BuildBarManager, Assembly-CSharp
+        m_MethodName: OnCreateBuildable
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1467470693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6262,7 +6324,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1606124314}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 304589159}
+        m_TargetAssemblyTypeName: BuildBarManager, Assembly-CSharp
+        m_MethodName: OpenBuildBar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1606124314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7754,7 +7828,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2136882973}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 304589159}
+        m_TargetAssemblyTypeName: BuildBarManager, Assembly-CSharp
+        m_MethodName: OnCreateBuildable
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2136882973
 MonoBehaviour:
   m_ObjectHideFlags: 0
